@@ -1,0 +1,36 @@
+.btn-theme {
+  cursor: pointer;
+  transition: color 300ms ease;
+}
+
+.circle-transition {
+  transition: r 100ms ease;
+}
+
+.circle-sunshine {
+  transition: r 600ms ease;
+}
+
+.svg-theme {
+  transition: transform 600ms ease;
+}
+
+body.light {
+  .btn-theme {
+    color: @text-secondary-light;
+  }
+
+  .btn-theme:hover {
+    color: @text-main-light;
+  }
+}
+
+body.dark {
+  .btn-theme {
+    color: @text-secondary-dark;
+  }
+
+  .btn-theme:hover {
+    color: @text-main-dark;
+  }
+}
