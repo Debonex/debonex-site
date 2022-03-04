@@ -1,0 +1,1 @@
+[{"name":"blog","type":"dir","path":"/","children":[{"name":"Hello world","type":"md","path":"/blog/","children":[]}],"count":1},{"name":"other","type":"dir","path":"/","children":[{"name":"Hello world","type":"md","path":"/other/","children":[]}],"count":1}]

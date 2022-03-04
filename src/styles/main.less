@@ -1,54 +1,10 @@
-@import "./colors.less";
 @import "./fonts.less";
-@import "./vars.less";
-@import "./theme.less";
+@import "./tailwind.css";
 @import "./components/index.less";
 
-// https://www.joshwcomeau.com/css/custom-css-reset/
-/*
-  1. Use a more-intuitive box-sizing model.
-*/
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-/*
-  2. Remove default margin
-*/
-* {
-  margin: 0;
-}
-/*
-  3. Allow percentage-based heights in the application
-*/
+// Allow percentage-based heights in the application
 html,
 body,
 #root {
   height: 100%;
-}
-
-body {
-  transition: color 300ms ease, background-color 300ms ease;
-}
-
-a {
-  text-decoration: none;
-}
-
-body.light {
-  a {
-    color: @text-main-light;
-  }
-}
-
-body.dark {
-  a {
-    color: @text-main-dark;
-  }
-}
-
-.app {
-  height: 100%;
-  overflow: auto;
 }

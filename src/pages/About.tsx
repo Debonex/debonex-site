@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react"
 
 const About: FunctionComponent = () => {
-  return <div>About</div>
+  return <div className="mx-auto max-w-5xl">About</div>
 }
 
 export default About

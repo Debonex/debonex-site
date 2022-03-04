@@ -1,0 +1,51 @@
+@keyframes circular-loading-circle {
+  0% {
+    stroke-dasharray: 1px, 200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -125px;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes delay-in {
+  0% {
+    opacity: 0;
+  }
+
+  99% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.container-loading {
+  animation: delay-in 0.15s forwards;
+
+  .loading-svg {
+    animation: rotate 1.4s linear infinite;
+  }
+
+  .loading-circle {
+    animation: circular-loading-circle 1.4s ease-in-out infinite;
+  }
+}
