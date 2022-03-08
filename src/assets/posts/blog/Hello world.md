@@ -1,5 +1,7 @@
-# Hello world
+::: intro
+This is introduction of post
+:::
 
-## hello world!
+# Hello world
 
 hello world

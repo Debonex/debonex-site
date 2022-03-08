@@ -1,10 +1,8 @@
 import axios from "axios"
-import MarkdownIt from "markdown-it"
 import { FunctionComponent, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import Loading from "../components/Loading"
-
-const md = new MarkdownIt()
+import { md } from "../modules/markdown/markdown-it"
 
 const Post: FunctionComponent = () => {
   const [loading, setLoading] = useState<boolean>(true)

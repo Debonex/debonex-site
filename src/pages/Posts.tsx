@@ -18,6 +18,11 @@ const Posts: FunctionComponent = () => {
                   key={`${item.path}${item.name}`}
                 >
                   <div className="font-wotfard text-xl font-bold">{item.name}</div>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: item.intro
+                    }}
+                  ></div>
                 </Link>
               ))}
             </div>

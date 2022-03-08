@@ -4,6 +4,7 @@ type PostItem = {
   path: string
   children: Array<PostItem>
   count?: number
+  intro: string
 }
 
 declare module "*.posts.json" {

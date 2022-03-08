@@ -60,8 +60,8 @@ const ThemeButton: FunctionComponent = () => {
           className="transition-all duration-100 ease-out"
         />
 
-        {sunshineXy.map((position) => (
-          <Sunshine cx={position[0]} cy={position[1]} r={sunshineRadius} />
+        {sunshineXy.map((position, idx) => (
+          <Sunshine cx={position[0]} cy={position[1]} r={sunshineRadius} key={idx} />
         ))}
       </svg>
     </div>
