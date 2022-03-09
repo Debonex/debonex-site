@@ -25,5 +25,5 @@ module.exports = {
       wotfard: ["Wotfard-Medium"]
     }
   },
-  plugins: []
+  plugins: [require("@tailwindcss/typography")]
 }

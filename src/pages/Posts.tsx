@@ -8,12 +8,12 @@ const Posts: FunctionComponent = () => {
     <div className="mx-auto max-w-5xl">
       {types.map((type) => {
         return (
-          <div>
+          <div key={type.name}>
             <div className="mb-6 ml-4 mt-8 text-4xl font-bold">{type.name}</div>
             <div className="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2">
               {type.children.map((item) => (
                 <Link
-                  className="bg-light-outstand py-8 px-4 transition-colors duration-300 ease-out dark:bg-dark-outstand  md:px-8"
+                  className="rounded-sm bg-light-outstand py-8 px-4 shadow-sm transition-colors duration-300  ease-out dark:bg-dark-outstand md:px-8"
                   to={`/post?path=${`${item.path}${item.name}`}`}
                   key={`${item.path}${item.name}`}
                 >
@@ -22,7 +22,8 @@ const Posts: FunctionComponent = () => {
                     dangerouslySetInnerHTML={{
                       __html: item.intro
                     }}
-                  ></div>
+                    className="mt-2 text-sm italic text-black-secondary dark:text-white-secondary"
+                  />
                 </Link>
               ))}
             </div>
