@@ -35,7 +35,13 @@ const Posts: FunctionComponent = () => {
       {types.map((type) => {
         return (
           <div key={type.name}>
-            <div className="mb-6 ml-4 mt-8 text-4xl font-bold">{type.name}</div>
+            <div className="mb-6 mt-8 flex items-end">
+              <div className="text-4xl font-bold">{type.name}</div>
+              <div className="ml-auto font-bold">
+                {type.count}
+                {type.count && type.count > 1 ? " articles" : " article"}
+              </div>
+            </div>
             <div className="mx-3 grid grid-cols-1 gap-5 md:grid-cols-2">
               {type.children.map((item) => (
                 <PostLink item={item} key={`${item.path}${item.name}`} />
