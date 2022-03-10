@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync, writeFile } from "fs"
 import { resolve } from "path"
-import { IntroTokenTypes } from "../src/modules/markdown/constant"
-import { md } from "../src/modules/markdown/markdown-it"
+import { IntroTokenTypes } from "../src/modules/posts/constant"
+import { md } from "../src/modules/posts/markdown-it"
 
 function getPostsTree(dirPath: string, basePath: string = "/"): Array<PostItem> {
   const list: Array<PostItem> = []
