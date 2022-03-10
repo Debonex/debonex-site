@@ -2,7 +2,7 @@ import axios from "axios"
 import { FunctionComponent, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import Loading from "../components/Loading"
-import { IntroTokenTypes, TitleTokenTypes } from "../modules/markdown/constant"
+import { IntroTokenTypes } from "../modules/markdown/constant"
 import { md } from "../modules/markdown/markdown-it"
 
 const Post: FunctionComponent = () => {
