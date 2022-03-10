@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync, writeFile } from "fs"
 import { resolve } from "path"
-import { IntroTokenTypes } from "../modules/markdown/constant"
-import { md } from "../modules/markdown/markdown-it"
+import { IntroTokenTypes } from "../src/modules/markdown/constant"
+import { md } from "../src/modules/markdown/markdown-it"
 
 function getPostsTree(dirPath: string, basePath: string = "/"): Array<PostItem> {
   const list: Array<PostItem> = []
@@ -52,6 +52,6 @@ function getPostsTree(dirPath: string, basePath: string = "/"): Array<PostItem> 
   return list
 }
 
-const targetFile = resolve(__dirname, "menu.posts.json")
-const postsDir = resolve(__dirname, "../assets/posts")
+const targetFile = resolve(__dirname, "../src/modules/posts/menu.posts.json")
+const postsDir = resolve(__dirname, "../public/posts")
 writeFile(targetFile, JSON.stringify(getPostsTree(postsDir)), {}, (err) => {})

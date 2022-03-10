@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "posts": "ts-node --skip-project --files ./src/posts/build.ts ./src/posts/build.d.ts",
+    "posts": "ts-node --skip-project --files ./scripts/build-posts.ts ./src/types/posts.d.ts",
     "tailwind": "tailwindcss -o ./src/styles/tailwind.css --watch",
     "tailwind:once": "tailwindcss -o ./src/styles/tailwind.css"
   },

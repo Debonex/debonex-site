@@ -468,40 +468,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-sepia:  ;
 }
 
-.container {
-  width: 100%;
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
-}
-
 .prose {
   color: var(--tw-prose-body);
   max-width: 65ch;
@@ -928,10 +894,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 0.75rem;
 }
 
-.ml-5 {
-  margin-left: 1.25rem;
-}
-
 .ml-auto {
   margin-left: auto;
 }
@@ -944,16 +906,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 1.5rem;
 }
 
-.ml-4 {
-  margin-left: 1rem;
-}
-
 .mt-8 {
   margin-top: 2rem;
 }
 
-.ml-2 {
-  margin-left: 0.5rem;
+.ml-6 {
+  margin-left: 1.5rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
 }
 
 .flex {
@@ -966,6 +928,22 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-full {
   height: 100%;
+}
+
+.h-60 {
+  height: 15rem;
+}
+
+.h-44 {
+  height: 11rem;
+}
+
+.h-32 {
+  height: 8rem;
+}
+
+.h-24 {
+  height: 6rem;
 }
 
 .max-w-5xl {
@@ -1132,6 +1110,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   overflow: hidden;
 }
 
+.rounded-sm {
+  border-radius: 0.125rem;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
@@ -1140,8 +1122,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-radius: 0.375rem;
 }
 
-.rounded-sm {
-  border-radius: 0.125rem;
+.rounded-t-md {
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
 }
 
 .bg-light {
@@ -1157,6 +1140,24 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-light-outstand {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-post-header {
+  background-image: url('/images/post-header.jpg');
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .py-3 {
@@ -1184,9 +1185,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 2rem;
 }
 
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .font-wotfard {
@@ -1222,6 +1223,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 2.5rem;
 }
 
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+
 .font-semibold {
   font-weight: 600;
 }
@@ -1232,6 +1238,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .font-bold {
   font-weight: 700;
+}
+
+.font-extrabold {
+  font-weight: 800;
 }
 
 .text-black {
@@ -1252,6 +1262,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-black-secondary {
   --tw-text-opacity: 1;
   color: rgb(66 76 84 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(243 243 243 / var(--tw-text-opacity));
 }
 
 .shadow-md {
@@ -1294,6 +1309,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 300ms;
 }
 
+.duration-150 {
+  transition-duration: 150ms;
+}
+
 .duration-600 {
   transition-duration: 600ms;
 }
@@ -1306,9 +1325,123 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
+.before\:absolute::before {
+  content: var(--tw-content);
+  position: absolute;
+}
+
+.before\:top-0::before {
+  content: var(--tw-content);
+  top: 0px;
+}
+
+.before\:left-0::before {
+  content: var(--tw-content);
+  left: 0px;
+}
+
+.before\:h-full::before {
+  content: var(--tw-content);
+  height: 100%;
+}
+
+.before\:w-full::before {
+  content: var(--tw-content);
+  width: 100%;
+}
+
+.before\:bg-light\/60::before {
+  content: var(--tw-content);
+  background-color: rgb(239 241 245 / 0.6);
+}
+
+.after\:absolute::after {
+  content: var(--tw-content);
+  position: absolute;
+}
+
+.after\:top-0::after {
+  content: var(--tw-content);
+  top: 0px;
+}
+
+.after\:left-0::after {
+  content: var(--tw-content);
+  left: 0px;
+}
+
+.after\:h-full::after {
+  content: var(--tw-content);
+  height: 100%;
+}
+
+.after\:w-full::after {
+  content: var(--tw-content);
+  width: 100%;
+}
+
+.after\:bg-light\/60::after {
+  content: var(--tw-content);
+  background-color: rgb(239 241 245 / 0.6);
+}
+
+.after\:transition-colors::after {
+  content: var(--tw-content);
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.after\:duration-300::after {
+  content: var(--tw-content);
+  transition-duration: 300ms;
+}
+
+.hover\:bg-right-bottom:hover {
+  background-position: right bottom;
+}
+
+.hover\:bg-\[top_1rem\]:hover {
+  background-position: top 1rem;
+}
+
+.hover\:bg-\[left_top_1rem\]:hover {
+  background-position: left top 1rem;
+}
+
+.hover\:bg-\[left_bottom_1rem\]:hover {
+  background-position: left bottom 1rem;
+}
+
+.hover\:bg-\[left_top_-1rem\]:hover {
+  background-position: left top -1rem;
+}
+
+.hover\:text-black-secondary:hover {
+  --tw-text-opacity: 1;
+  color: rgb(66 76 84 / var(--tw-text-opacity));
+}
+
 .hover\:text-black:hover {
   --tw-text-opacity: 1;
   color: rgb(10 12 16 / var(--tw-text-opacity));
+}
+
+.before\:hover\:bg-\[top_1rem\]:hover::before {
+  content: var(--tw-content);
+  background-position: top 1rem;
+}
+
+.before\:hover\:bg-\[center_top_1rem\]:hover::before {
+  content: var(--tw-content);
+  background-position: center top 1rem;
+}
+
+.before\:hover\:bg-right-bottom:hover::before {
+  content: var(--tw-content);
+  background-position: right bottom;
 }
 
 .dark .dark\:prose-invert {
@@ -1346,6 +1479,36 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .dark .dark\:text-white-secondary {
+  --tw-text-opacity: 1;
+  color: rgb(183 185 187 / var(--tw-text-opacity));
+}
+
+.dark .dark\:text-black {
+  --tw-text-opacity: 1;
+  color: rgb(10 12 16 / var(--tw-text-opacity));
+}
+
+.dark .dark\:before\:bg-dark\/40::before {
+  content: var(--tw-content);
+  background-color: rgb(14 20 27 / 0.4);
+}
+
+.dark .dark\:before\:bg-dark\/50::before {
+  content: var(--tw-content);
+  background-color: rgb(14 20 27 / 0.5);
+}
+
+.dark .dark\:before\:bg-dark\/60::before {
+  content: var(--tw-content);
+  background-color: rgb(14 20 27 / 0.6);
+}
+
+.dark .dark\:after\:bg-dark\/40::after {
+  content: var(--tw-content);
+  background-color: rgb(14 20 27 / 0.4);
+}
+
+.dark .dark\:hover\:text-white-secondary:hover {
   --tw-text-opacity: 1;
   color: rgb(183 185 187 / var(--tw-text-opacity));
 }

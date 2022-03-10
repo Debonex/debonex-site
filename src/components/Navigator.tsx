@@ -1,11 +1,17 @@
 import { FunctionComponent } from "react"
 import { Link, To } from "react-router-dom"
+import useRipple from "../hooks/useRipple"
 import ThemeButton from "./ThemeButton"
 
 const NavigatorLinkItem: FunctionComponent<{ to: To }> = (props) => {
+  const [addRipple, ripples] = useRipple()
+
   return (
-    <Link className="font-large ml-5 font-wotfard text-lg font-semibold" to={props.to}>
-      {props.children}
+    <Link className="relative overflow-hidden rounded-sm py-1 px-4" onMouseDown={addRipple} to={props.to}>
+      <span className="font-large font-wotfard text-lg font-semibold transition-colors duration-150 hover:text-black-secondary dark:hover:text-white-secondary">
+        {props.children}
+      </span>
+      {ripples}
     </Link>
   )
 }
@@ -18,7 +24,7 @@ const Navigator: FunctionComponent = () => {
           <div className="text-primary">Debone</div>
           <div className="text-deputy">x</div>
         </Link>
-        <div className="flex items-center py-2">
+        <div className="flex items-center">
           <NavigatorLinkItem to="/">Posts</NavigatorLinkItem>
           <NavigatorLinkItem to="/photos">Photos</NavigatorLinkItem>
           <NavigatorLinkItem to="/lab">Lab</NavigatorLinkItem>

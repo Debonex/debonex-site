@@ -22,7 +22,8 @@ module.exports = {
           "100%": { "stroke-dasharray": "100px, 200px", "stroke-dashoffset": "-125px" }
         }
       },
-      animation: { ripple: "ripple 500ms ease-in forwards" }
+      animation: { ripple: "ripple 500ms ease-in forwards" },
+      backgroundImage: { "post-header": "url('/images/post-header.jpg')" }
     },
     colors: {
       primary: "#4aa8a8",
