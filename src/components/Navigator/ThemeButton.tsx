@@ -1,4 +1,5 @@
 import { FunctionComponent, useState } from "react"
+import { v4 } from "../../modules/utilities/uuid"
 
 const Sunshine: FunctionComponent<{ cx: number; cy: number; r: number }> = (props) => {
   return <circle cx={props.cx} cy={props.cy} r={props.r} className="transition-all duration-600 ease-out"></circle>
@@ -34,6 +35,7 @@ const ThemeButton: FunctionComponent = () => {
     [5, 25],
     [10, 12]
   ]
+  const maskId = v4()
 
   return (
     <div
@@ -48,7 +50,7 @@ const ThemeButton: FunctionComponent = () => {
         fill="currentColor"
         style={{ transform: `rotate(${isDark ? -30 : 0}deg)` }}
       >
-        <mask id="mask">
+        <mask id={maskId} className="theme-mask">
           <rect x={0} y={0} width={50} height={50} fill="#fff"></rect>
           <circle cx={40} cy={22} r={isDark ? 18 : 0} fill="#000" className="transition-all duration-100 ease-out" />
         </mask>
@@ -56,7 +58,7 @@ const ThemeButton: FunctionComponent = () => {
           cx={25}
           cy={25}
           r={isDark ? 16 : 12}
-          mask="url(#mask)"
+          mask={`url(#${maskId})`}
           className="transition-all duration-100 ease-out"
         />
 

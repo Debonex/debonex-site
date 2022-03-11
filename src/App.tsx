@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react"
 import { Route, Routes } from "react-router-dom"
 
-import Navigator from "./components/Navigator"
+import Navigator from "./components/Navigator/Navigator"
 import About from "./pages/About"
 import Lab from "./pages/Lab"
 import Photos from "./pages/Photos"
