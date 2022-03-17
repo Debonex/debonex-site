@@ -1,11 +1,11 @@
 import axios from "axios"
-import { FunctionComponent, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import Loading from "../components/Loading"
 import { IntroTokenTypes } from "../modules/posts/constant"
 import { md } from "../modules/posts/markdown-it"
 
-const Post: FunctionComponent = () => {
+const Post: FC = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [content, setContent] = useState<string>("")
   const [params] = useSearchParams()

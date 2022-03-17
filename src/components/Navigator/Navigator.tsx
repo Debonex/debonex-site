@@ -1,11 +1,11 @@
-import { FunctionComponent, useState } from "react"
+import { FC, useState } from "react"
 import { Link } from "react-router-dom"
 import NavigatorLinkItem from "./NavigatorLinkItem"
 import PanelButton from "./PanelButton"
 import PanelLinkItem from "./PanelLinkItem"
 import ThemeButton from "./ThemeButton"
 
-const Navigator: FunctionComponent = () => {
+const Navigator: FC = () => {
   const [active, setActive] = useState<boolean>(false)
 
   return (

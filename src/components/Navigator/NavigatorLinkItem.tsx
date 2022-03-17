@@ -1,9 +1,9 @@
 import clsx from "clsx"
-import { FunctionComponent } from "react"
+import { FC } from "react"
 import { NavLink, To } from "react-router-dom"
 import useRipple from "../../hooks/useRipple"
 
-const NavigatorLinkItem: FunctionComponent<{ to: To }> = (props) => {
+const NavigatorLinkItem: FC<{ to: To }> = (props) => {
   const [addRipple, ripples] = useRipple()
 
   return (

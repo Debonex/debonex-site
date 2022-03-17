@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { FunctionComponent, MouseEventHandler, useState } from "react"
+import { FC, MouseEventHandler } from "react"
 
 type LineProps = {
   d: string
@@ -7,7 +7,7 @@ type LineProps = {
   strokeDashoffset?: string | number
 }
 
-const Line: FunctionComponent<LineProps> = (props) => {
+const Line: FC<LineProps> = (props) => {
   return (
     <path
       className="transition-all duration-300"
@@ -27,7 +27,7 @@ type NavigatorMenuButtonProps = {
   onClick: MouseEventHandler<SVGSVGElement> | undefined
 }
 
-const PanelButton: FunctionComponent<NavigatorMenuButtonProps> = (props) => {
+const PanelButton: FC<NavigatorMenuButtonProps> = (props) => {
   return (
     <svg
       className={clsx({

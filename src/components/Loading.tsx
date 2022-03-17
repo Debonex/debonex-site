@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react"
+import { FC } from "react"
 
 type LoadingProps = {
   width: number | string
@@ -6,7 +6,7 @@ type LoadingProps = {
   color?: string
 }
 
-const Loading: FunctionComponent<LoadingProps> = (props) => {
+const Loading: FC<LoadingProps> = (props) => {
   return (
     <span className="animate-[delay-in_0.15s_forwards]">
       <svg

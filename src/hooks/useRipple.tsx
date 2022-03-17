@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useState } from "react"
+import React, { ReactElement, useState } from "react"
 
 const useRipple: () => [(e: React.MouseEvent) => void, ReactElement[]] = () => {
   const [ripples, setRipples] = useState<ReactElement[]>([])

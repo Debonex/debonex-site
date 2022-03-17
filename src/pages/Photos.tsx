@@ -1,6 +1,6 @@
-import { FunctionComponent } from "react"
+import { FC } from "react"
 
-const Photos: FunctionComponent = () => {
+const Photos: FC = () => {
   return <div className="mx-auto max-w-5xl">Photos</div>
 }
 

@@ -1,28 +1,14 @@
-import { FunctionComponent, useState } from "react"
+import { FC, useContext } from "react"
+import { ThemeContext } from "../../App"
 import { v4 } from "../../modules/utilities/uuid"
 
-const Sunshine: FunctionComponent<{ cx: number; cy: number; r: number }> = (props) => {
+const Sunshine: FC<{ cx: number; cy: number; r: number }> = (props) => {
   return <circle cx={props.cx} cy={props.cy} r={props.r} className="transition-all duration-600 ease-out"></circle>
 }
 
-const ThemeButton: FunctionComponent = () => {
-  const theme = localStorage.getItem("theme")
-  const [isDark, setIsDark] = useState<boolean>(theme === "dark")
-
-  document.body.classList.add(theme === "dark" ? "dark" : "light")
-
-  const handleChangeTheme = () => {
-    const theme = localStorage.getItem("theme")
-    if (theme === "dark") {
-      document.body.classList.replace("dark", "light")
-      localStorage.setItem("theme", "light")
-      setIsDark(false)
-    } else {
-      document.body.classList.replace("light", "dark")
-      localStorage.setItem("theme", "dark")
-      setIsDark(true)
-    }
-  }
+const ThemeButton: FC = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext)
+  const isDark = theme === "dark"
 
   const sunshineRadius = isDark ? 0 : 3
   const sunshineXy = [
@@ -39,7 +25,7 @@ const ThemeButton: FunctionComponent = () => {
 
   return (
     <div
-      onClick={handleChangeTheme}
+      onClick={toggleTheme}
       className="cursor-pointer text-black-secondary transition-colors duration-300 ease-out hover:text-black dark:text-white-secondary dark:hover:text-white"
     >
       <svg

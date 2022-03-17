@@ -1,9 +1,9 @@
-import { FunctionComponent } from "react"
+import { FC } from "react"
 import menu from "@/modules/posts/menu.posts.json"
 import { Link } from "react-router-dom"
 import useRipple from "../hooks/useRipple"
 
-const PostLink: FunctionComponent<{ postItem: PostItem; className?: string }> = (props) => {
+const PostLink: FC<{ postItem: PostItem; className?: string }> = (props) => {
   const [addRipple, ripples] = useRipple()
 
   const postItem = props.postItem
@@ -27,7 +27,7 @@ const PostLink: FunctionComponent<{ postItem: PostItem; className?: string }> = 
   )
 }
 
-const Posts: FunctionComponent = () => {
+const Posts: FC = () => {
   const types = menu.filter((item) => item.type === "dir")
 
   return (
