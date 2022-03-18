@@ -40,6 +40,7 @@ const Navigator: FC = () => {
           style={{
             height: "calc(100vh - 100%)"
           }}
+          onClick={() => setActive(false)}
         >
           <div className="my-2 flex justify-end">
             <ThemeButton />

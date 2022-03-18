@@ -1,9 +1,11 @@
 const colors = require("tailwindcss/colors")
+const plugin = require("tailwindcss/plugin")
 module.exports = {
   content: ["./index.html", "./src/**/*.{ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
     extend: {
+      spacing: { 38: "9.5rem", 42: "10.5rem", 84: "21rem" },
       transitionDuration: { 600: "600ms" },
       keyframes: {
         ripple: {
@@ -44,5 +46,14 @@ module.exports = {
       wotfard: ["Wotfard-Medium"]
     }
   },
-  plugins: [require("@tailwindcss/typography")]
+  plugins: [
+    require("@tailwindcss/typography"),
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".clip-profile": {
+          "clip-path": 'path("M 0,88 A 88,88,0,0,0,176,88 A 999,999,0,1,0,0,88")'
+        }
+      })
+    })
+  ]
 }

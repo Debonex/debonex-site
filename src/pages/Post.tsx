@@ -37,7 +37,7 @@ const Post: FC = () => {
   return (
     <div className="mx-auto max-w-5xl">
       {loading && (
-        <div className="text-primary">
+        <div className="mt-40 flex justify-center text-primary">
           <Loading width={40} height={40} />
         </div>
       )}
