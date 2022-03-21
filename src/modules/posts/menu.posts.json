@@ -1,1 +1,0 @@
-[{"name":"blog","type":"dir","path":"/","children":[{"name":"Hello world","type":"md","path":"/blog/","children":[],"intro":"<p>This is introduction of post</p>\n"}],"count":1,"intro":""},{"name":"other","type":"dir","path":"/","children":[{"name":"Hello world2","type":"md","path":"/other/","children":[],"intro":""}],"count":1,"intro":""}]

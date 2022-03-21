@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
+    "prebuild": "yarn posts",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "posts": "ts-node --skip-project --files ./scripts/build-posts.ts ./src/types/posts.d.ts",

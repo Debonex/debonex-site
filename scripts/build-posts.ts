@@ -1,7 +1,21 @@
 import { readdirSync, readFileSync, statSync, writeFile } from "fs"
 import { resolve } from "path"
+import { spawnSync } from "child_process"
 import { IntroTokenTypes } from "../src/modules/posts/constant"
 import { md } from "../src/modules/posts/markdown-it"
+
+// prepend zero
+function pz(num: number): string {
+  return num < 10 ? `0${num}` : `${num}`
+}
+
+function getLastCommitTime(fullPath: string): string {
+  const commitDateStr = spawnSync("git", ["log", "-1", "--format=%cd", fullPath]).output.toString()
+  const date = new Date(commitDateStr)
+  return `${date.getFullYear()}-${pz(date.getMonth() + 1)}-${pz(date.getDate())} ${pz(date.getHours())}:${pz(
+    date.getMinutes()
+  )}:${pz(date.getSeconds())}`
+}
 
 function getPostsTree(dirPath: string, basePath: string = "/"): Array<PostItem> {
   const list: Array<PostItem> = []
@@ -17,7 +31,8 @@ function getPostsTree(dirPath: string, basePath: string = "/"): Array<PostItem> 
         path: basePath,
         children: children,
         count: children.filter((item) => item.type === "md").length,
-        intro: ""
+        intro: "",
+        commitTime: getLastCommitTime(`${dirPath}/${file}`)
       })
     }
     // markdown file item
@@ -45,7 +60,8 @@ function getPostsTree(dirPath: string, basePath: string = "/"): Array<PostItem> 
         type: "md",
         path: basePath,
         children: [],
-        intro: intro
+        intro: intro,
+        commitTime: getLastCommitTime(`${dirPath}/${file}`)
       })
     }
   }
