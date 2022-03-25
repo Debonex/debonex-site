@@ -49,10 +49,8 @@ const Post: FC = () => {
             </div>
           </div>
           <article
-            className="prose px-6 py-12 dark:prose-invert "
-            dangerouslySetInnerHTML={{
-              __html: articleHtml
-            }}
+            className="prose max-w-none px-6 py-12 dark:prose-invert "
+            dangerouslySetInnerHTML={{ __html: articleHtml }}
           />
         </div>
       )}

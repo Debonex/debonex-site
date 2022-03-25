@@ -16,6 +16,7 @@ const PostLink: FC<{ postItem: PostItem; className?: string }> = (props) => {
       <div className="font-wotfard text-xl font-bold" onClick={(e) => addRipple(e)}>
         {postItem.name}
       </div>
+      <div className="mt-1 text-xs text-black-secondary/70 dark:text-white-secondary/70">{postItem.commitTime}</div>
       <div
         dangerouslySetInnerHTML={{
           __html: postItem.intro

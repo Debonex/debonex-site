@@ -46,6 +46,7 @@ const About: FC = () => {
           />
         </div>
       </div>
+      <div className="mt-8 font-wotfard text-4xl font-bold">Debonex</div>
     </div>
   )
 }
