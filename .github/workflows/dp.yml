@@ -1,0 +1,32 @@
+# deploy to ecs
+name: deploy to nginx
+on:
+  push:
+    branches:
+      - master
+jobs:
+  # build production
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      #pre setup
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: use nodejs 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      #yarn install and build
+      - run: yarn ci
+      - run: yarn posts
+      - run: yarn build
+      # deploy
+      - name: deploy
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.USER }}
+          TARGET: "/usr/share/nginx/html/dist/"
