@@ -5,6 +5,7 @@ type PostItem = {
   children: Array<PostItem>
   count?: number
   intro: string
+  addTime: string
   commitTime: string
 }
 

@@ -9,12 +9,32 @@ function pz(num: number): string {
   return num < 10 ? `0${num}` : `${num}`
 }
 
-function getLastCommitTime(fullPath: string): string {
-  const commitDateStr = spawnSync("git", ["log", "-1", "--format=%cd", fullPath]).output.toString()
-  const date = new Date(commitDateStr)
+function formatTime(date: Date) {
   return `${date.getFullYear()}-${pz(date.getMonth() + 1)}-${pz(date.getDate())} ${pz(date.getHours())}:${pz(
     date.getMinutes()
   )}:${pz(date.getSeconds())}`
+}
+
+function getLastCommitTime(fullPath: string): string {
+  const commitDateStr = spawnSync("git", ["log", "-1", "--format=%cd", fullPath]).output.toString()
+  const date = new Date(commitDateStr)
+  return formatTime(date)
+}
+
+function getAddedTime(fullPath: string): string {
+  const logInfo = spawnSync("git", [
+    "log",
+    "--follow",
+    "--diff-filter=A",
+    "--find-renames=40%",
+    fullPath
+  ]).output.toString()
+  const addedDateStr = logInfo.match(/Date:\s+(.*)/)
+  if (addedDateStr) {
+    const date = new Date(addedDateStr[1])
+    return formatTime(date)
+  }
+  return ""
 }
 
 function getPostsTree(dirPath: string, basePath: string = "/"): Array<PostItem> {
@@ -22,9 +42,10 @@ function getPostsTree(dirPath: string, basePath: string = "/"): Array<PostItem> 
   const files = readdirSync(dirPath)
   for (const file of files) {
     const stat = statSync(resolve(dirPath, file))
+    const fullPath = resolve(dirPath, file)
     // directory item
     if (stat.isDirectory()) {
-      const children = getPostsTree(`${dirPath}/${file}`, `${basePath}${file}/`)
+      const children = getPostsTree(fullPath, `${basePath}${file}/`)
       list.push({
         name: file,
         type: "dir",
@@ -32,12 +53,13 @@ function getPostsTree(dirPath: string, basePath: string = "/"): Array<PostItem> 
         children: children,
         count: children.filter((item) => item.type === "md").length,
         intro: "",
-        commitTime: getLastCommitTime(`${dirPath}/${file}`)
+        commitTime: getLastCommitTime(fullPath),
+        addTime: getAddedTime(fullPath)
       })
     }
     // markdown file item
     else if (/\.md$/.test(file)) {
-      const str = readFileSync(`${dirPath}/${file}`).toString("utf-8")
+      const str = readFileSync(fullPath).toString("utf-8")
       // extra post intro container
       const tokens = md.parse(str, null)
       let intro
@@ -61,8 +83,23 @@ function getPostsTree(dirPath: string, basePath: string = "/"): Array<PostItem> 
         path: basePath,
         children: [],
         intro: intro,
-        commitTime: getLastCommitTime(`${dirPath}/${file}`)
+        commitTime: getLastCommitTime(fullPath),
+        addTime: getAddedTime(fullPath)
       })
+    }
+  }
+
+  // sort by addTime
+  const stack = [...list]
+  while (stack.length) {
+    const item = stack.pop() as PostItem
+    if (item.type === "dir") {
+      item.children.sort((a, b) => {
+        const aTime = new Date(a.addTime)
+        const bTime = new Date(b.addTime)
+        return bTime.getTime() - aTime.getTime()
+      })
+      stack.push(...item.children)
     }
   }
   return list
