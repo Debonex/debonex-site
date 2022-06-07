@@ -2,7 +2,8 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
 import App from "./App"
-import "./styles/main.less"
+import "./styles/fonts.css"
+import "./styles/tailwind.css"
 
 ReactDOM.render(
   <React.StrictMode>
