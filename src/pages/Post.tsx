@@ -6,6 +6,8 @@ import Loading from "../components/Loading"
 import { IntroTokenTypes, ReactTokenTypes } from "../modules/posts/constant"
 import { md } from "../modules/posts/markdown-it"
 
+const globComponents = import.meta.glob("../components/**/*.tsx")
+
 const Post: FC = () => {
   const [loading, setLoading] = useState<boolean>(true)
   const [content, setContent] = useState<ReactElement[]>([])
@@ -50,7 +52,8 @@ const Post: FC = () => {
         case ReactTokenTypes.open:
           const match = token.info.trim().match(/^react\s+(.+)$/)
           if (match) {
-            const Component: FC = (await import("../components/" + match[1])).default
+            const componentPath = `../components/${match[1]}.tsx`
+            const Component: FC = (await globComponents[componentPath]()).default
             articleContent.push(<Component key={articleContent.length} />)
           }
           break
