@@ -1,37 +1,74 @@
 import axios from "axios"
-import { FC, useEffect, useState } from "react"
+import Token from "markdown-it/lib/token"
+import { FC, ReactElement, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import Loading from "../components/Loading"
-import { IntroTokenTypes } from "../modules/posts/constant"
+import { IntroTokenTypes, ReactTokenTypes } from "../modules/posts/constant"
 import { md } from "../modules/posts/markdown-it"
 
 const Post: FC = () => {
   const [loading, setLoading] = useState<boolean>(true)
-  const [content, setContent] = useState<string>("")
+  const [content, setContent] = useState<ReactElement[]>([])
   const [params] = useSearchParams()
 
   const path = params.get("path")
   useEffect(() => {
     setLoading(true)
     axios.get(`/posts${path}.md`).then((res) => {
-      setContent(res.data)
+      render(res.data)
       setLoading(false)
     })
   }, [])
 
   const title = path?.substring(path.lastIndexOf("/") + 1)
-  let articleHtml = ""
-  if (content) {
-    const tokens = md.parse(content, null)
-    const indexOfType = (type: string): number => {
-      return tokens.findIndex((token) => token.type === type)
-    }
-    // remove intro part
-    const introFrom = indexOfType(IntroTokenTypes.open),
-      introTo = indexOfType(IntroTokenTypes.close)
-    tokens.splice(introFrom, introTo - introFrom + 1)
 
-    articleHtml = md.renderer.render(tokens, {}, null)
+  const render = async (content: string) => {
+    const articleContent: ReactElement[] = []
+    const tokens = md.parse(content, null)
+
+    let state = "content"
+    // temp token list
+    let temp: Token[] = []
+    for (const token of tokens) {
+      switch (token.type) {
+        case IntroTokenTypes.open:
+          state = "intro"
+          if (temp.length) {
+            articleContent.push(
+              <div
+                key={articleContent.length}
+                dangerouslySetInnerHTML={{ __html: md.renderer.render(temp, {}, null) }}
+              />
+            )
+            temp = []
+          }
+
+          break
+        case IntroTokenTypes.close:
+          state = "content"
+          break
+        case ReactTokenTypes.open:
+          const match = token.info.trim().match(/^react\s+(.+)$/)
+          if (match) {
+            const Component: FC = (await import("../components/" + match[1])).default
+            articleContent.push(<Component key={articleContent.length} />)
+          }
+          break
+        case ReactTokenTypes.close:
+          break
+        default:
+          if (state === "content") {
+            temp.push(token)
+          }
+          break
+      }
+    }
+    if (temp.length) {
+      articleContent.push(
+        <div key={articleContent.length} dangerouslySetInnerHTML={{ __html: md.renderer.render(temp, {}, null) }}></div>
+      )
+    }
+    setContent(articleContent)
   }
 
   return (
@@ -48,10 +85,7 @@ const Post: FC = () => {
               {title}
             </div>
           </div>
-          <article
-            className="prose max-w-none px-6 py-12 dark:prose-invert "
-            dangerouslySetInnerHTML={{ __html: articleHtml }}
-          />
+          <article className="prose max-w-none px-6 py-12 dark:prose-invert">{content}</article>
         </div>
       )}
     </div>
