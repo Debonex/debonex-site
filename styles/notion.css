@@ -1,0 +1,13 @@
+.notion-nav-header {
+  max-width: var(--notion-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.notion-frame {
+  padding: 0;
+}
+
+.notion-title {
+  text-align: center;
+}
