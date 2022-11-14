@@ -4,6 +4,7 @@ export type SiteConfig = {
   notionPageId: string;
   revalidate: number;
   notionCachePath: string;
+  githubUrl?: string;
 };
 
 type Config = SiteConfig & {

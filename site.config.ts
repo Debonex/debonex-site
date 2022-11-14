@@ -7,6 +7,8 @@ const siteConfig: SiteConfig = {
   revalidate: 30,
   // where to cache notion info
   notionCachePath: "./.site-cache/notion",
+
+  githubUrl: "https://github.com/Debonex/debonex-site",
 };
 
 export default siteConfig;

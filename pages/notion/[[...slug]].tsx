@@ -34,7 +34,10 @@ export const getStaticProps: GetStaticProps<NotionDynamicPageProps> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  await refresh();
+  if (process.env.NODE_ENV === "production") {
+    await refresh();
+  }
+
   const rootPageMeta = await getRootPageMeta();
   if (rootPageMeta) {
     return {
