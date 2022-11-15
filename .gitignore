@@ -16,3 +16,7 @@ yarn-error.log*
 /.site-cache/
 
 .env
+
+# database
+*.db-journal
+*.db

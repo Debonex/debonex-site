@@ -9,9 +9,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:db-client": "prisma generate",
+    "update:db": "prisma migrate deploy"
   },
   "dependencies": {
+    "@prisma/client": "^4.6.1",
     "cacache": "^17.0.2",
     "clsx": "^1.2.1",
     "debug": "^4.3.4",
@@ -20,12 +23,21 @@
     "notion-client": "^6.15.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-notion-x": "^6.15.6"
+    "react-notion-x": "^6.15.6",
+    "rehype-code-titles": "^1.1.0",
+    "rehype-prism-plus": "^1.5.0",
+    "rehype-stringify": "^9.0.3",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
+    "unified": "^10.1.2"
   },
   "devDependencies": {
+    "@mdx-js/loader": "^2.1.5",
     "@svgr/webpack": "^6.5.1",
+    "@tailwindcss/typography": "^0.5.8",
     "@types/cacache": "^15.0.1",
     "@types/debug": "^4.1.7",
+    "@types/mdx": "^2.0.3",
     "@types/node": "18.11.9",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
@@ -35,6 +47,8 @@
     "postcss": "^8.4.19",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
+    "prisma": "^4.6.1",
+    "raw-loader": "^4.0.2",
     "sass": "^1.56.1",
     "tailwindcss": "^3.2.3",
     "ts-node": "^10.9.1",

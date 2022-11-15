@@ -1,0 +1,20 @@
+export const meta = {
+  category: "blog",
+  title: "Hello world",
+  fileName: "hello-world.mdx",
+  create: "2022-07-22T17:48:00+08:00",
+  update: "2022-07-22T17:48:00+08:00",
+  keywords: ["next.js", "mdx", "prisma"],
+  intro: "Hello world",
+};
+import usePostLayout from "lib/hooks/usePostLayout";
+export default usePostLayout(meta);
+import Favicon from "components/common/Favicon";
+
+### Hello world
+
+```js:test.js
+console.log('Hello world');
+```
+
+<Favicon className="h-16 w-16" />

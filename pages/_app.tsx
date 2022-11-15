@@ -5,6 +5,7 @@ import "prismjs/themes/prism-tomorrow.css";
 import "react-notion-x/src/styles.css";
 import "styles/global.css";
 import "styles/notion.scss";
+import "styles/prism.scss";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (

@@ -1,0 +1,82 @@
+export const meta = {
+  category: "blog",
+  title: "使用 Github Actions 持续部署 Docker 镜像到云服务器",
+  fileName: "deploy-docker-w-github-actions.mdx",
+  create: "2022-07-29T11:23:00+08:00",
+  update: "2022-08-31T10:55:00+08:00",
+  keywords: ["Docker", "CI/CD", "Github Actions"],
+};
+import usePostLayout from "lib/hooks/usePostLayout";
+export default usePostLayout(meta);
+
+import Note from "components/posts/Note";
+
+## 目标
+
+将代码推送到 Github 仓库主分支后，触发 Github Actions，自动构建 Docker 镜像，在镜像构建完成后，将镜像推送到云服务器并自动部署。
+
+## Github Actions 和 workflows
+
+[Github Actions](https://docs.github.com/en/actions) 是 Github 提供的 CI/CD 平台，可以帮助开发者自动执行一些任务，比如测试、构建、部署、发布等等。
+
+[workflows](https://docs.github.com/en/actions/using-workflows/about-workflows) 是描述任务触发条件、如何执行的配置文件。
+Github 会读取 `.github/workflows` 目录下的所有 `yaml` 和 `yml` 文件，根据文件配置的内容来执行任务。
+
+workflow 中如果需要使用敏感信息，比如密码、服务器地址等，可以在 `代码仓库->Settings->Secrets` 中添加一个 secret，
+然后在 workflow 中使用 `{{secrets.SECRET_NAME}}` 来引用。
+
+## ghcr.io
+
+[`ghcr.io`](https://github.com/features/packages) 是 Github 提供的镜像仓库，类似于 Docker Hub，但是 `ghcr.io` 除了可以托管容器之外，还可以托管 npm 包、maven 包、gradle 包等。
+这里我使用 `ghcr.io` 来托管我的镜像。
+
+往 `ghcr.io` 推送和拉取镜像需要有 Github Token，可以在 [https://github.com/settings/tokens/new](https://github.com/settings/tokens/new) 创建。
+
+<Note> ⚠️ 创建 Token 时记得勾选 `write:packages` 权限。</Note>
+
+## 完整的 Github Actions 配置
+
+下面是自动部署这个博客的 Github Actions 配置。
+
+```yaml:.github/workflows/deploy-docker.yaml
+name: deploy docker image
+# 在主分支代码发生变更后触发 action
+on:
+  push:
+    branches: ["master"]
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      # 检出代码主分支
+      - name: check out repo
+        uses: actions/checkout@v3
+      # 构建镜像，并将镜像推送到 ghcr.io
+      - name: build image and push it to ghcr.io
+        run: |
+          echo "${{ secrets.PACKAGE_GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker build . -t ghcr.io/debonex/debonex-blog:latest
+          docker push ghcr.io/debonex/debonex-blog:latest
+      # 用ssh登录云服务器，拉取镜像，并部署到云服务器上
+      - name: deploy image to ecs
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ECS_HOST }}
+          username: ${{ secrets.ECS_USERNAME }}
+          password: ${{ secrets.ECS_PASSWORD }}
+          script: |
+            echo "${{ secrets.PACKAGE_GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker stop blog
+            docker rmi ghcr.io/debonex/debonex-blog:latest
+            docker pull ghcr.io/debonex/debonex-blog:latest
+            docker run -d --rm --name blog -p 3000:3000 -v ${{ secrets.ECS_DATABASE_PATH }}:/app/blog.db ghcr.io/debonex/debonex-blog:latest
+```
+
+在 workflow 中可以直接使用 `${{ secrets.GITHUB_TOKEN }}` 来引用 Github Token，没必要额外设置一个 secret。
+但是如果同时存在多个 Token，似乎没办法指定特定的 Token。
+
+### References
+
+- [https://docs.github.com/en/actions](https://docs.github.com/en/actions)
+
+- [https://stackoverflow.com/questions/67023441/deploy-docker-container-with-compose-github-actions](https://stackoverflow.com/questions/67023441/deploy-docker-container-with-compose-github-actions)

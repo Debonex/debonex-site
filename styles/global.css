@@ -17,15 +17,15 @@ html {
   background: #c1c1c1;
 }
 
-.dark *::-webkit-scrollbar {
+.dark-mode *::-webkit-scrollbar {
   background: #424242;
 }
 
-.dark *::-webkit-scrollbar-thumb {
+.dark-mode *::-webkit-scrollbar-thumb {
   background: #686868;
 }
 
-.dark *::-webkit-scrollbar-thumb:hover {
+.dark-mode *::-webkit-scrollbar-thumb:hover {
   background: #7b7b7b;
 }
 
@@ -35,6 +35,6 @@ html {
   scrollbar-color: #c1c1c1 #f1f1f1;
 }
 
-.dark * {
+.dark-mode * {
   scrollbar-color: #686868 #424242;
 }

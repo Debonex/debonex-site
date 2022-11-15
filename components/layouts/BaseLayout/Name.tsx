@@ -1,6 +1,6 @@
+import Favicon from "components/common/Favicon";
 import Link from "next/link";
 import { FC, useState } from "react";
-import Favicon from "components/Favicon";
 
 const Name: FC = () => {
   const [T, setT] = useState(true);
