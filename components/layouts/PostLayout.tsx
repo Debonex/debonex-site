@@ -51,7 +51,7 @@ const PostLayout: FC<{ meta: PostMeta; children: React.ReactNode }> = ({
         <div className="ml-auto flex items-center text-sm text-black/70 dark:text-white/70">
           <EyeSvg width={16} height={16} className="mr-1 inline" />
           {viewLoading ? (
-            <Loading className="inline text-sky-500" size={16} />
+            <Loading className="inline text-xs text-primary-main" />
           ) : (
             <span>{view?.count}</span>
           )}

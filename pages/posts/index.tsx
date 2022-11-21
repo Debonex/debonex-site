@@ -70,7 +70,7 @@ const Post: FC<{ post: PostInfo; category: string }> = ({ post, category }) => {
       )}
     >
       <Link href={postHref} className="row-span-2 w-5 select-none">
-        <div className="flex h-full w-1 items-center rounded-r-full bg-sky-500 transition-[width] will-change-[width] group-hover:w-5">
+        <div className="flex h-full w-1 items-center rounded-r-full bg-primary-main transition-[width] will-change-[width] group-hover:w-5">
           <div className="scale-0 border-4 border-l-[6px] border-transparent border-l-white transition-transform group-hover:translate-x-2 group-hover:scale-100"></div>
         </div>
       </Link>

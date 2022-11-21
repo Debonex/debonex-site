@@ -21,7 +21,7 @@ const FileItem: FC<{
         "cursor-pointer select-none border py-0.5 pr-4 font-mono text-sm transition-colors duration-75",
         "hover:bg-light-dim dark:hover:bg-[#282e34]",
         {
-          "border-sky-500 bg-light-dim text-sky-500 dark:!bg-[#39414a]":
+          "border-primary-main bg-light-dim text-primary-main dark:!bg-[#39414a]":
             activeFile,
           "border-transparent": !activeFile,
         }

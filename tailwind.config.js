@@ -13,9 +13,13 @@ module.exports = {
         container: "1100px",
       },
       colors: {
+        primary: {
+          main: "#2b7fd5",
+          secondary: "#79b8ff",
+          outstand: "#9ecbff",
+        },
         transparent: "transparent",
         current: "currentColor",
-        sky: colors.sky,
         dark: {
           main: "#24292e",
           deep: "#1f2428",

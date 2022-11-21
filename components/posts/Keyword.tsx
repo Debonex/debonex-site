@@ -9,7 +9,7 @@ const Keyword: FC<{ keyword: string; className?: string }> = ({
   <Link
     href={`/posts?keyword=${keyword}`}
     className={clsx(
-      "rounded-md bg-sky-300 px-2 py-1 text-xs text-sky-500 no-underline transition-colors hover:bg-sky-500 hover:text-white",
+      "rounded-md bg-sky-300 px-2 py-1 text-xs text-primary-main no-underline transition-colors hover:bg-primary-main hover:text-white",
       className
     )}
   >

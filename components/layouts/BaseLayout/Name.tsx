@@ -24,7 +24,7 @@ const Name: FC = () => {
             ? "translateY(0px) scale(1) rotate(0deg)"
             : "translateY(1.5px) scale(0.9) rotate(-90deg)",
         }}
-        className="text-sky-500 transition-all"
+        className="text-primary-main transition-all"
       >
         <path
           d="M40,70 L140,70 A30,30,0,0,1,140,140 L40,40 A15,15,0,0,0,40,70"
