@@ -24,7 +24,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn prisma generate
+RUN yarn build:db-client
 RUN yarn build
 
 # If using npm comment out above and use below instead

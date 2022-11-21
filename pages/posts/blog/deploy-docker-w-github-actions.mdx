@@ -3,7 +3,7 @@ export const meta = {
   title: "使用 Github Actions 持续部署 Docker 镜像到云服务器",
   fileName: "deploy-docker-w-github-actions.mdx",
   create: "2022-07-29T11:23:00+08:00",
-  update: "2022-08-31T10:55:00+08:00",
+  update: "2022-11-21T17:11:00+08:00",
   keywords: ["Docker", "CI/CD", "Github Actions"],
 };
 import usePostLayout from "lib/hooks/usePostLayout";
@@ -55,8 +55,8 @@ jobs:
       - name: build image and push it to ghcr.io
         run: |
           echo "${{ secrets.PACKAGE_GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker build . -t ghcr.io/debonex/debonex-blog:latest
-          docker push ghcr.io/debonex/debonex-blog:latest
+          docker build . -t ghcr.io/debonex/debonex-site:latest
+          docker push ghcr.io/debonex/debonex-site:latest
       # 用ssh登录云服务器，拉取镜像，并部署到云服务器上
       - name: deploy image to ecs
         uses: appleboy/ssh-action@master
@@ -66,10 +66,10 @@ jobs:
           password: ${{ secrets.ECS_PASSWORD }}
           script: |
             echo "${{ secrets.PACKAGE_GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            docker stop blog
-            docker rmi ghcr.io/debonex/debonex-blog:latest
-            docker pull ghcr.io/debonex/debonex-blog:latest
-            docker run -d --rm --name blog -p 3000:3000 -v ${{ secrets.ECS_DATABASE_PATH }}:/app/blog.db ghcr.io/debonex/debonex-blog:latest
+            docker stop site
+            docker rmi ghcr.io/debonex/debonex-site:latest
+            docker pull ghcr.io/debonex/debonex-site:latest
+            docker run -d --rm --name site -p 3000:3000 -v ${{ secrets.ECS_DATABASE_PATH }}:/app/site.db ghcr.io/debonex/debonex-site:latest
 ```
 
 在 workflow 中可以直接使用 `${{ secrets.GITHUB_TOKEN }}` 来引用 Github Token，没必要额外设置一个 secret。
