@@ -54,7 +54,7 @@ COPY --from=builder /app/.next/static ./.next/static
 
 # USER nextjs
 
-ENV DATABASE_URL file:/app/blog.db
+ENV DATABASE_URL file:/app/site.db
 
 EXPOSE 3000
 
