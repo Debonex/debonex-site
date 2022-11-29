@@ -59,6 +59,9 @@ export const getStyles = (theme?: Theme) => {
       height: 10,
       borderRadius: 10,
       marginRight: 4,
+      animationName: "scale-in",
+      animationDuration: "700ms",
+      animationFillMode: "forwards",
     }),
     badgeText: defineStyle({
       marginRight: 4,
@@ -66,6 +69,10 @@ export const getStyles = (theme?: Theme) => {
     langsBar: defineStyle({
       display: "flex",
       height: "8px",
+      animationName: "scale-x",
+      animationDuration: "700ms",
+      animationFillMode: "forwards",
+      transformOrigin: "left",
     }),
   };
 };

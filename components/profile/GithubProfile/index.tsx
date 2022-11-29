@@ -64,13 +64,19 @@ const GithubProfile: FC<GithubProfileProps> = ({
           </div>
           <div style={_.bodyRight}>
             <div style={_.langsBar}>
-              {LangRatioList.map((item) => (
+              {LangRatioList.map((item, idx) => (
                 <div
                   key={item.lang}
                   style={{
                     backgroundColor: colors[item.lang],
                     width: `${item.ratioOfTops * 100}%`,
                     height: "100%",
+                    borderTopLeftRadius: idx === 0 ? "3px" : "0px",
+                    borderBottomLeftRadius: idx === 0 ? "3px" : "0px",
+                    borderTopRightRadius:
+                      idx === LangRatioList.length - 1 ? "3px" : "0px",
+                    borderBottomRightRadius:
+                      idx === LangRatioList.length - 1 ? "3px" : "0px",
                   }}
                 />
               ))}
