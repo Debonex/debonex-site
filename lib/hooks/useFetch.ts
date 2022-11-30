@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+type Serializable = string | object | number | boolean | bigint;
+
 type UseFetchType = <T>(path: string, body: Serializable) => [T, boolean];
 
 const usePost: UseFetchType = (path: string, body: Serializable) => {
