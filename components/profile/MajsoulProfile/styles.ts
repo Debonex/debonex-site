@@ -36,5 +36,11 @@ export const getStyles = (theme?: Theme) => {
       marginTop: 4,
       fontSize: 16,
     }),
+    containerChart: defineStyle({
+      animationName: "scale-x-in",
+      animationDuration: "700ms",
+      animationFillMode: "forwards",
+      transformOrigin: "left",
+    }),
   };
 };

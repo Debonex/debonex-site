@@ -1,10 +1,12 @@
 import MajsoulProfile from "components/profile/MajsoulProfile";
+import { dark, light } from "components/profile/styleEngine";
 import Cache from "lib/cache";
 import { fetchGameHistory, fetchPlayerStats } from "lib/profile/majsoul";
 import fetchBase64 from "lib/utils/fetchBase64";
 import { NextApiHandler } from "next";
 import absoluteUrl from "next-absolute-url";
 import { renderToString } from "react-dom/server";
+import { getTheme } from "./common";
 
 const cache = new Cache(".site-cache/majsoul");
 
@@ -32,6 +34,8 @@ const profile: NextApiHandler = async (req, res) => {
 
   const id = req.query.id as string;
   const mode = req.query.mode as string;
+
+  const theme = getTheme(req);
 
   if (!/^\d+$/.test(id)) {
     return res.status(400).send("Invalid player id.");
@@ -72,6 +76,7 @@ const profile: NextApiHandler = async (req, res) => {
           gameHistory={gameHistory}
           playerStats={playerStats}
           levelImage={levelImage}
+          theme={theme}
         />
       )
     );

@@ -3,6 +3,7 @@ import { gql, User } from "lib/profile/github";
 import fetchBase64 from "lib/utils/fetchBase64";
 import { NextApiHandler } from "next";
 import { renderToString } from "react-dom/server";
+import { getTheme } from "./common";
 
 const profile: NextApiHandler = async (req, res) => {
   if (req.method !== "GET") {
@@ -10,6 +11,7 @@ const profile: NextApiHandler = async (req, res) => {
   }
 
   const username = req.query.username as string;
+  const theme = getTheme(req);
 
   const response = await gql(`
   query{
@@ -64,6 +66,7 @@ const profile: NextApiHandler = async (req, res) => {
             langDict={langDict}
             name={user.name}
             bio={user.bio}
+            theme={theme}
           />
         )
       );

@@ -52,7 +52,7 @@ export const fetchPlayerStats = async (playerId: number, sanma: boolean) => {
     );
   };
 
-  const response = await Promise.race(
+  const response = await Promise.any(
     API_URL_LIST.map((baseUrl) => fetchPlayerStatsImpl(baseUrl))
   );
 
@@ -75,7 +75,7 @@ export const fetchGameHistory = async (playerId: number, sanma: boolean) => {
     );
   };
 
-  const response = await Promise.race(
+  const response = await Promise.any(
     API_URL_LIST.map((baseUrl) => fetchGameHistoryImpl(baseUrl))
   );
 

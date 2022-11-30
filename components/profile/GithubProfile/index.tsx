@@ -1,6 +1,7 @@
 import keyframes from "!!raw-loader!./keyframes.module.css";
 import Image from "next/image";
 import { FC } from "react";
+import { Theme } from "../styleEngine";
 import SvgWrapper from "../SvgWrapper";
 import colors from "./colors";
 import { getStyles } from "./styles";
@@ -10,6 +11,7 @@ type GithubProfileProps = {
   name: string;
   bio: string;
   langDict: Record<string, number>;
+  theme: Theme;
 };
 
 type LangRatio = {
@@ -18,14 +20,14 @@ type LangRatio = {
   ratioOfTotal: number;
 };
 
-const _ = getStyles();
-
 const GithubProfile: FC<GithubProfileProps> = ({
   avatarUrl,
   name,
   bio,
   langDict,
+  theme,
 }) => {
+  const _ = getStyles(theme);
   const { total, langList } = Object.keys(langDict).reduce(
     (prev, lang) => {
       prev.total += langDict[lang];

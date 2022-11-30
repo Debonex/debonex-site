@@ -3,6 +3,7 @@ import * as echarts from "echarts";
 import { GameHistory, PlayerStats } from "lib/profile/majsoul";
 import Image from "next/image";
 import { FC } from "react";
+import { Theme } from "../styleEngine";
 import SvgWrapper from "../SvgWrapper";
 import { getStyles } from "./styles";
 
@@ -10,15 +11,16 @@ type MajsoulProfileProps = {
   playerStats: PlayerStats;
   gameHistory: GameHistory[];
   levelImage: string;
+  theme: Theme;
 };
-
-const _ = getStyles();
 
 const MajsoulProfile: FC<MajsoulProfileProps> = ({
   gameHistory,
   playerStats,
   levelImage,
+  theme,
 }) => {
+  const _ = getStyles(theme);
   const level = Math.floor(playerStats.level.id / 100);
   const isKonten = level % 10 >= 6;
   const subLevel = playerStats.level.id % 100;
@@ -49,7 +51,7 @@ const MajsoulProfile: FC<MajsoulProfileProps> = ({
     return list;
   }, []);
 
-  const chart = echarts.init(null, "dark", {
+  const chart = echarts.init(null, theme.dark ? "dark" : null, {
     renderer: "svg",
     ssr: true,
     width: 284,
@@ -96,6 +98,7 @@ const MajsoulProfile: FC<MajsoulProfileProps> = ({
             </div>
           </div>
           <div
+            style={_.containerChart}
             dangerouslySetInnerHTML={{ __html: chart.renderToSVGString() }}
           />
         </div>
