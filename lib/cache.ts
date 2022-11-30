@@ -27,7 +27,7 @@ class Cache {
   }
 
   public get(key: string) {
-    return cacache.get(this.cachePath, key);
+    return cacache.get(this.cachePath, key).catch(() => undefined);
   }
 }
 

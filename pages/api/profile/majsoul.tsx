@@ -1,36 +1,80 @@
-import { NextApiHandler } from "next";
-import { renderToString } from "react-dom/server";
 import MajsoulProfile from "components/profile/MajsoulProfile";
+import Cache from "lib/cache";
+import { fetchGameHistory, fetchPlayerStats } from "lib/profile/majsoul";
+import fetchBase64 from "lib/utils/fetchBase64";
+import { NextApiHandler } from "next";
+import absoluteUrl from "next-absolute-url";
+import { renderToString } from "react-dom/server";
 
-const API_URL = "https://1.data.amae-koromo.com/api/v2";
-const PL4_URL = `${API_URL}/pl4`;
-const PL3_URL = `${API_URL}/pl3`;
+const cache = new Cache(".site-cache/majsoul");
+
+const levelImages = {
+  101: "sima_fish.png",
+  102: "sima_queshi.png",
+  103: "sima_quejie.png",
+  104: "sima_quehao.png",
+  105: "sima_quesheng.png",
+  106: "sima_huntian.png",
+  107: "sima_huntian.png",
+  201: "sanma_fish.png",
+  202: "sanma_queshi.png",
+  203: "sanma_quejie.png",
+  204: "sanma_quehao.png",
+  205: "sanma_quesheng.png",
+  206: "sanma_huntian.png",
+  207: "sanma_huntian.png",
+};
 
 const profile: NextApiHandler = async (req, res) => {
   if (req.method !== "GET") {
     return res.status(405).send({ error: "Method not allowed" });
   }
 
+  const id = req.query.id as string;
+  const mode = req.query.mode as string;
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(400).send("Invalid player id.");
+  }
+
+  const playerId = Number(id);
+  const sanma = mode === "3";
+
+  const [playerStats, gameHistory] = await Promise.all([
+    fetchPlayerStats(playerId, sanma),
+    fetchGameHistory(playerId, sanma),
+  ]);
+
+  if (!playerStats || !gameHistory) {
+    return res.status(500).send("Player not found.");
+  }
+
+  const level = Math.floor(playerStats.level.id / 100);
+  const cacheBuffer = await cache.get(level.toString());
+  const { origin } = absoluteUrl(req);
+
+  let levelImage;
+  if (!cacheBuffer) {
+    levelImage = await fetchBase64(
+      `${origin}/images/profile/${levelImages[level]}`
+    );
+    cache.put(level.toString(), levelImage);
+  } else {
+    levelImage = cacheBuffer.data.toString();
+  }
+
   return res
     .status(200)
     .setHeader("Content-Type", "image/svg+xml")
-    .end(renderToString(<MajsoulProfile />));
-
-  const response = await fetch(
-    `${PL4_URL}/player_stats/${11341035}/0/9999999999999?mode=8,9,11,12,15,16`
-  );
-
-  if (response.ok) {
-    // const data = (await response.json()) as PlayerStats;
-    // console.log(data);
-    return res
-      .status(200)
-      .setHeader("Content-Type", "image/svg+xml")
-      .end(renderToString(<MajsoulProfile />));
-    // return res.status(200).json(data);
-  }
-
-  return res.status(200).json({ a: 1 });
+    .end(
+      renderToString(
+        <MajsoulProfile
+          gameHistory={gameHistory}
+          playerStats={playerStats}
+          levelImage={levelImage}
+        />
+      )
+    );
 };
 
 export default profile;
