@@ -1,10 +1,9 @@
 import MajsoulProfile from "components/profile/MajsoulProfile";
-import { dark, light } from "components/profile/styleEngine";
 import Cache from "lib/cache";
 import { fetchGameHistory, fetchPlayerStats } from "lib/profile/majsoul";
+import absoluteUrl from "lib/utils/absoluteUrl";
 import fetchBase64 from "lib/utils/fetchBase64";
 import { NextApiHandler } from "next";
-import absoluteUrl from "next-absolute-url";
 import { renderToString } from "react-dom/server";
 import { getTheme } from "./common";
 

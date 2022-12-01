@@ -22,7 +22,6 @@
     "debug": "^4.3.4",
     "echarts": "^5.4.0",
     "next": "^13.0.3",
-    "next-absolute-url": "^1.2.2",
     "next-themes": "^0.2.1",
     "notion-client": "^6.15.6",
     "react": "^18.2.0",
