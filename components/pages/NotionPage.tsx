@@ -59,7 +59,7 @@ const NotionPage: FC<NotionPageProps> = ({
     <NotionRenderer
       recordMap={recordMap}
       rootPageId={rootPageUuid}
-      mapPageUrl={(id) => `/notion${urlMap[id]}`}
+      mapPageUrl={(id) => `/notes${urlMap[id]}`}
       fullPage={true}
       components={{ Code, Collection, Modal }}
       searchNotion={searchNotion}
