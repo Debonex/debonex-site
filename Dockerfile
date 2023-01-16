@@ -15,6 +15,8 @@ RUN yarn install
 
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
+# https://github.com/prisma/prisma/issues/14073#issuecomment-1348534199
+RUN apk add --update --no-cache openssl1.1-compat
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
