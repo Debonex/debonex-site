@@ -12,6 +12,7 @@ type MajsoulProfileProps = {
   gameHistory: GameHistory[];
   levelImage: string;
   theme: Theme;
+  sanma: boolean;
 };
 
 const MajsoulProfile: FC<MajsoulProfileProps> = ({
@@ -19,6 +20,7 @@ const MajsoulProfile: FC<MajsoulProfileProps> = ({
   playerStats,
   levelImage,
   theme,
+  sanma,
 }) => {
   const _ = getStyles(theme);
   const level = Math.floor(playerStats.level.id / 100);
@@ -72,6 +74,8 @@ const MajsoulProfile: FC<MajsoulProfileProps> = ({
       scale: true,
       interval: 1,
       inverse: true,
+      max: sanma ? 3 : 4,
+      min: 1,
       axisLabel: { formatter: "{value}位" },
     },
     series: [{ data: ranks, type: "line", symbolSize: 8 }],

@@ -75,6 +75,7 @@ const profile: NextApiHandler = async (req, res) => {
           gameHistory={gameHistory}
           playerStats={playerStats}
           levelImage={levelImage}
+          sanma={sanma}
           theme={theme}
         />
       )
